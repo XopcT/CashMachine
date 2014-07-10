@@ -1,0 +1,13 @@
+﻿@model CashMachine.Models.CardSearchRequest
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("FindCard", "Home", FormMethod.Post))
+{
+    <label for="Number" />
+    @Html.TextBox("Number", Model.Number);
+}
