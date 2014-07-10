@@ -12,11 +12,16 @@ namespace CashMachine.Data
         /// Sets/retrieves the Card's Number.
         /// </summary>
         public string Number { get; set; }
-
+        
         /// <summary>
         /// Sets/retrieves the Card's Balance.
         /// </summary>
-        public float Balance { get; set; }
+        public decimal Balance { get; set; }
+
+        /// <summary>
+        /// Retrieves the Number of wrong Pin Enter Attempts.
+        /// </summary>
+        public int WrongAttempts { get; set; }
 
         /// <summary>
         /// Sets/retrieves whether the Card is valid or blocked.
@@ -24,5 +29,11 @@ namespace CashMachine.Data
         public bool IsValid { get; set; }
 
         #endregion
+
+        /// <summary>
+        /// Retrieves the maximum allowed Number of wrong Attempts.
+        /// </summary>
+        public const int MaximumAttempts = 2;
+
     }
 }

@@ -139,16 +139,24 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CardOperationsController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PinCodeController.cs" />
+    <Compile Include="Controllers\SessionExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CardBalance.cs" />
     <Compile Include="Models\CardError.cs" />
     <Compile Include="Models\CardSearchRequest.cs" />
     <Compile Include="Models\PinRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UnityDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -241,7 +249,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CardError.cshtml" />
-    <Content Include="Views\PinCode\PinCode.cshtml" />
+    <Content Include="Views\PinCode\Index.cshtml" />
+    <Content Include="Views\CardOperations\Index.cshtml" />
+    <Content Include="Views\CardOperations\CheckBalance.cshtml" />
     <None Include="Web.unity.config" />
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +270,12 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="StringResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,0 +1,18 @@
+﻿@model CashMachine.Models.PinRequest
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Enter Pin</h2>
+
+@using(Html.BeginForm("TryAccess", "PinCode", FormMethod.Post))
+{
+    @Html.TextBox("Pin", @Model.Pin);
+    
+    if (!string.IsNullOrEmpty(Model.PinErrorMessage))
+    {
+        <p>@Model.PinErrorMessage</p>
+    }
+}

@@ -1,0 +1,21 @@
+﻿@model CashMachine.Models.CardBalance
+
+@{
+    ViewBag.Title = "CheckBalance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CheckBalance</h2>
+
+<table>
+    <tr>
+        <td>Number:</td><td>@Model.CardNumber</td>
+    </tr>
+    <tr>
+        <td>Balance:</td><td>@Model.Balance</td>
+    </tr>
+    <tr>
+        <td>Today is:</td><td>@System.DateTime.Today.ToShortDateString()</td>
+    </tr>
+</table>
+@Html.ActionLink("Exit", "Exit")
