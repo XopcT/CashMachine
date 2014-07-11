@@ -1,0 +1,11 @@
+﻿@model CashMachine.Models.CashAmountRequest
+
+@{
+    ViewBag.Title = "GetCash";
+}
+
+<h2>Get Cash</h2>
+@using(@Html.BeginForm("GetCash", "CardOperations", FormMethod.Post))
+{
+    @Html.TextBox("Amount", @Model.Amount)
+}

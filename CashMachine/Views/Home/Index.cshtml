@@ -8,6 +8,6 @@
 <h2>Enter Card Number</h2>
 @using (Html.BeginForm("FindCard", "Home", FormMethod.Post))
 {
-    <label for="Number" />
+    <label for="Number">Number:</label>
     @Html.TextBox("Number", Model.Number);
 }

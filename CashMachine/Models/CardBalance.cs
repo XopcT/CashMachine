@@ -5,15 +5,21 @@ using System.Web;
 
 namespace CashMachine.Models
 {
+    /// <summary>
+    /// Contains Data for Card Balance.
+    /// </summary>
     public class CardBalance
     {
         #region Properties
-
-        public string Balance { get; set; }
-
+        /// <summary>
+        /// Sets/retieves the Card Number.
+        /// </summary>
         public string CardNumber { get; set; }
 
-        public string Today { get; set; }
+        /// <summary>
+        /// Sets/retrieves the Card Balance.
+        /// </summary>
+        public decimal Balance { get; set; }
 
         #endregion
     }

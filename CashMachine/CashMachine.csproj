@@ -150,6 +150,7 @@
     <Compile Include="Models\CardBalance.cs" />
     <Compile Include="Models\CardError.cs" />
     <Compile Include="Models\CardSearchRequest.cs" />
+    <Compile Include="Models\CashAmountRequest.cs" />
     <Compile Include="Models\PinRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringResources.Designer.cs">
@@ -252,6 +253,7 @@
     <Content Include="Views\PinCode\Index.cshtml" />
     <Content Include="Views\CardOperations\Index.cshtml" />
     <Content Include="Views\CardOperations\CheckBalance.cshtml" />
+    <Content Include="Views\CardOperations\GetCash.cshtml" />
     <None Include="Web.unity.config" />
   </ItemGroup>
   <ItemGroup>
