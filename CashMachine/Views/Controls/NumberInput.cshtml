@@ -1,0 +1,50 @@
+﻿<script type="text/javascript">
+    function addText(elementName, text) {
+        if (typeof (formatInput) == 'function')
+            formatInput();
+        var element = document.getElementById(elementName);
+        if (element.value.length < element.maxLength)
+            element.value += text;
+        return false;
+    }
+    function backspace(elementName) {
+        text = document.getElementById(elementName).value;
+        text = text.substr(0, text.length - 1);
+        document.getElementById(elementName).value = text;
+        return false;
+    }
+    function clearText(elementName)
+    {
+        document.getElementById(elementName).value = '';
+        return false;
+    }
+</script>
+
+<table>
+    <tr>
+        <td><input type="button" onclick="addText('@Model', 1)" value="1" /></td>
+        <td><input type="button" onclick="addText('@Model', 2)" value="2" /></td>
+        <td><input type="button" onclick="addText('@Model', 3)" value="3" /></td>
+    </tr>
+    <tr>
+        <td><input type="button" onclick="addText('@Model', 4)" value="4" /></td>
+        <td><input type="button" onclick="addText('@Model', 5)" value="5" /></td>
+        <td><input type="button" onclick="addText('@Model', 6)" value="6" /></td>
+    </tr>
+    <tr>
+        <td><input type="button" onclick="addText('@Model', 7)" value="7" /></td>
+        <td><input type="button" onclick="addText('@Model', 8)" value="8" /></td>
+        <td><input type="button" onclick="addText('@Model', 9)" value="9" /></td>
+    </tr>
+    <tr>
+        <td><input type="button" onclick="backspace('@Model')" value="&lt;" /></td>
+        <td><input type="button" onclick="addText('@Model', '0')" value="0" /></td>
+        <td>&nbsp</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td><input type="submit" value="OK" /></td>
+        <td><input type="button" onclick="clearText('@Model')" value="Clear" /></td>
+    </tr>
+</table>

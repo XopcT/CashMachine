@@ -139,10 +139,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CardOperationsController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PinCodeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SessionExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -153,6 +152,7 @@
     <Compile Include="Models\CashAmountRequest.cs" />
     <Compile Include="Models\PinRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
     <Compile Include="StringResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -248,12 +248,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Login\CardError.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\CardError.cshtml" />
-    <Content Include="Views\PinCode\Index.cshtml" />
-    <Content Include="Views\CardOperations\Index.cshtml" />
-    <Content Include="Views\CardOperations\CheckBalance.cshtml" />
-    <Content Include="Views\CardOperations\GetCash.cshtml" />
+    <Content Include="Views\Home\CheckBalance.cshtml" />
+    <Content Include="Views\Home\GetCash.cshtml" />
+    <Content Include="Views\Home\Success.cshtml" />
+    <Content Include="Views\Home\Fail.cshtml" />
+    <Content Include="Views\Login\NumberRequest.cshtml" />
+    <Content Include="Views\Login\PinRequest.cshtml" />
+    <Content Include="Views\Controls\NumberInput.cshtml" />
     <None Include="Web.unity.config" />
   </ItemGroup>
   <ItemGroup>

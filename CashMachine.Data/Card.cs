@@ -33,7 +33,7 @@ namespace CashMachine.Data
         /// <summary>
         /// Retrieves the maximum allowed Number of wrong Attempts.
         /// </summary>
-        public const int MaximumAttempts = 2;
+        public const int MaximumAttempts = 4;
 
     }
 }

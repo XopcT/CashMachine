@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Data.Common;
 using System.Linq;
+using CashMachine.Data;
+using System.Transactions;
 
 namespace CashMachine.Storage
 {
@@ -58,6 +60,72 @@ namespace CashMachine.Storage
         }
 
         /// <summary>
+        /// Retrieves a Card's Balance.
+        /// </summary>
+        /// <param name="number">Number of the Card to get Balance for.</param>
+        /// <returns>Card's Balance.</returns>
+        public decimal GetBalance(string number)
+        {
+            using (StorageDataContext context = base.CreateDataContext())
+            {
+                using (TransactionScope transaction = new TransactionScope())
+                {
+                    // Gettings Card's Balance:
+                    Card existing = context.Cards
+                        .Where(card => card.Number == number)
+                        .First();
+
+                    // Creating Operation's Log:
+                    Operation operation = new Operation()
+                    {
+                        CardId = existing.Id,
+                        OperationCode = (int)OperationCodes.CheckBalance,
+                        Timestamp = System.DateTime.Now,
+                    };
+                    context.Operations.InsertOnSubmit(operation);
+
+                    // Saving Data:
+                    context.SubmitChanges();
+                    transaction.Complete();
+
+                    return existing.Balance;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Removes Cash from the Card.
+        /// </summary>
+        /// <param name="cardNumber">Card to modify.</param>
+        /// <param name="delta">Amount of money to remove.</param>
+        public void GetCash(string cardNumber, decimal delta)
+        {
+            using (StorageDataContext context = base.CreateDataContext())
+            {
+                using(TransactionScope transaction = new TransactionScope())
+                {
+                    // Updating Card's Balance:
+                    Card existing = context.Cards.Where(card => card.Number == cardNumber).First();
+                    existing.Balance -= delta;
+
+                    // Creating Operation's Log:
+                    Operation operation = new Operation()
+                    {
+                        CardId = existing.Id,
+                        Amount = delta,
+                        OperationCode = (int)OperationCodes.GetCash,
+                        Timestamp = System.DateTime.Now,
+                    };
+                    context.Operations.InsertOnSubmit(operation);
+
+                    // Saving Data:
+                    context.SubmitChanges();
+                    transaction.Complete();
+                }
+            }
+        }
+
+        /// <summary>
         /// Saves specified Card.
         /// </summary>
         /// <param name="obj">Card to save.</param>
@@ -81,7 +149,15 @@ namespace CashMachine.Storage
         /// <param name="obj">Card to delete.</param>
         public void Delete(Data.Card obj)
         {
-            throw new NotImplementedException();
+            using (StorageDataContext context = base.CreateDataContext())
+            {
+                Card existing = context.Cards
+                    .Where(card => card.Number == obj.Number)
+                    .First();
+                context.Cards.DeleteOnSubmit(existing);
+                context.SubmitChanges();
+            }
         }
+    
     }
 }

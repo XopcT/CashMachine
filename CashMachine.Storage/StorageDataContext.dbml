@@ -8,6 +8,17 @@
       <Column Name="Balance" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="WrongAttempts" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IsValid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Card_Operation" Member="Operations" AccessModifier="Internal" ThisKey="Id" OtherKey="CardId" Type="Operation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Operations" Member="Operations" AccessModifier="Internal">
+    <Type Name="Operation" AccessModifier="Internal">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CardId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OperationCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Card_Operation" Member="Card" AccessModifier="Internal" ThisKey="CardId" OtherKey="Id" Type="Card" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

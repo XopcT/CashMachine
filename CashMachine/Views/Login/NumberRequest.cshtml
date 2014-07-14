@@ -1,0 +1,22 @@
+﻿@model CashMachine.Models.CardSearchRequest
+
+@{
+    ViewBag.Title = "NumberRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function formatInput()
+    {
+        var element = document.getElementById('Number');
+        if (element.value.length == 4 || element.value.length == 9 || element.value.length == 14)
+            element.value += '-';
+    }
+</script>
+
+<h2>Enter Card Number</h2>
+@using (Html.BeginForm("NumberRequest", "Login", FormMethod.Post))
+{
+    <label>Number:</label>
+    @Html.TextBox("Number", @Model.Number, new { @readonly = "readonly", autocomplete = "off", maxlength=19 })
+    @Html.Partial("~/Views/Controls/NumberInput.cshtml", "Number")
+}

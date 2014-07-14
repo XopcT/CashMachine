@@ -14,7 +14,7 @@ namespace CashMachine.Controllers
         /// </summary>
         public ActionResult ToNumberRequest()
         {
-            return base.RedirectToAction("Index", "Home");
+            return base.RedirectToAction("NumberRequest", "Login");
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace CashMachine.Controllers
         /// </summary>
         public ActionResult ToPinRequest()
         {
-            return base.RedirectToAction("Index", "PinCode");
+            return base.RedirectToAction("PinRequest", "Login");
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace CashMachine.Controllers
         /// </summary>
         public ActionResult ToCardOperations()
         {
-            return base.RedirectToAction("Index", "CardOperations");
+            return base.RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -39,7 +39,11 @@ namespace CashMachine.Controllers
         /// <param name="errorMessage">Error Message.</param>
         public ActionResult ToCardError(string errorMessage)
         {
-            return base.RedirectToAction("CardError", "Home", new CardError() { ErrorMessage = errorMessage });
+            // Invalidating Card's Permission:
+            base.Session.SetCardNumber(string.Empty);
+            base.Session.SetPin(string.Empty);
+            // Showing Error Message:
+            return base.RedirectToAction("CardError", "Login", new CardError() { ErrorMessage = errorMessage });
         }
 
         /// <summary>

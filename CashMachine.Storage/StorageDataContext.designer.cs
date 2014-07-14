@@ -33,6 +33,9 @@ namespace CashMachine.Storage
     partial void InsertCard(Card instance);
     partial void UpdateCard(Card instance);
     partial void DeleteCard(Card instance);
+    partial void InsertOperation(Operation instance);
+    partial void UpdateOperation(Operation instance);
+    partial void DeleteOperation(Operation instance);
     #endregion
 		
 		public StorageDataContext() : 
@@ -72,6 +75,14 @@ namespace CashMachine.Storage
 				return this.GetTable<Card>();
 			}
 		}
+		
+		internal System.Data.Linq.Table<Operation> Operations
+		{
+			get
+			{
+				return this.GetTable<Operation>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cards")]
@@ -91,6 +102,8 @@ namespace CashMachine.Storage
 		private int _WrongAttempts;
 		
 		private bool _IsValid;
+		
+		private EntitySet<Operation> _Operations;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -112,6 +125,7 @@ namespace CashMachine.Storage
 		
 		public Card()
 		{
+			this._Operations = new EntitySet<Operation>(new Action<Operation>(this.attach_Operations), new Action<Operation>(this.detach_Operations));
 			OnCreated();
 		}
 		
@@ -231,6 +245,230 @@ namespace CashMachine.Storage
 					this._IsValid = value;
 					this.SendPropertyChanged("IsValid");
 					this.OnIsValidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Card_Operation", Storage="_Operations", ThisKey="Id", OtherKey="CardId")]
+		internal EntitySet<Operation> Operations
+		{
+			get
+			{
+				return this._Operations;
+			}
+			set
+			{
+				this._Operations.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Operations(Operation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Card = this;
+		}
+		
+		private void detach_Operations(Operation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Card = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Operations")]
+	internal partial class Operation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _CardId;
+		
+		private int _OperationCode;
+		
+		private System.Nullable<decimal> _Amount;
+		
+		private System.DateTime _Timestamp;
+		
+		private EntityRef<Card> _Card;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnCardIdChanging(int value);
+    partial void OnCardIdChanged();
+    partial void OnOperationCodeChanging(int value);
+    partial void OnOperationCodeChanged();
+    partial void OnAmountChanging(System.Nullable<decimal> value);
+    partial void OnAmountChanged();
+    partial void OnTimestampChanging(System.DateTime value);
+    partial void OnTimestampChanged();
+    #endregion
+		
+		public Operation()
+		{
+			this._Card = default(EntityRef<Card>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardId", DbType="Int NOT NULL")]
+		public int CardId
+		{
+			get
+			{
+				return this._CardId;
+			}
+			set
+			{
+				if ((this._CardId != value))
+				{
+					if (this._Card.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCardIdChanging(value);
+					this.SendPropertyChanging();
+					this._CardId = value;
+					this.SendPropertyChanged("CardId");
+					this.OnCardIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationCode", DbType="Int NOT NULL")]
+		public int OperationCode
+		{
+			get
+			{
+				return this._OperationCode;
+			}
+			set
+			{
+				if ((this._OperationCode != value))
+				{
+					this.OnOperationCodeChanging(value);
+					this.SendPropertyChanging();
+					this._OperationCode = value;
+					this.SendPropertyChanged("OperationCode");
+					this.OnOperationCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
+		public System.DateTime Timestamp
+		{
+			get
+			{
+				return this._Timestamp;
+			}
+			set
+			{
+				if ((this._Timestamp != value))
+				{
+					this.OnTimestampChanging(value);
+					this.SendPropertyChanging();
+					this._Timestamp = value;
+					this.SendPropertyChanged("Timestamp");
+					this.OnTimestampChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Card_Operation", Storage="_Card", ThisKey="CardId", OtherKey="Id", IsForeignKey=true)]
+		internal Card Card
+		{
+			get
+			{
+				return this._Card.Entity;
+			}
+			set
+			{
+				Card previousValue = this._Card.Entity;
+				if (((previousValue != value) 
+							|| (this._Card.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Card.Entity = null;
+						previousValue.Operations.Remove(this);
+					}
+					this._Card.Entity = value;
+					if ((value != null))
+					{
+						value.Operations.Add(this);
+						this._CardId = value.Id;
+					}
+					else
+					{
+						this._CardId = default(int);
+					}
+					this.SendPropertyChanged("Card");
 				}
 			}
 		}

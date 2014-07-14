@@ -1,0 +1,16 @@
+﻿@model CashMachine.Models.PinRequest
+
+@{
+    ViewBag.Title = "PinRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Enter Pin</h2>
+@using (Html.BeginForm("PinRequest", "Login", FormMethod.Post))
+{
+    <label>Pin:</label>
+    @Html.Password("Pin", @Model.Pin, new { @readonly="readonly", maxlength=4 })
+    @Html.ValidationMessage("Pin")
+    @Html.Partial("~/Views/Controls/NumberInput.cshtml", "Pin")
+}
+@Html.ActionLink("Select another Card", "NumberRequest")

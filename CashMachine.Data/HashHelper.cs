@@ -16,7 +16,6 @@ namespace CashMachine.Data
         /// <returns>Computed Hash String.</returns>
         public static string ComputeHash(string number, string pin)
         {
-            return pin;
             string source = "AddSomeSalt" + pin + number;
             // Computing Hash Bytes:
             MD5 md5 = System.Security.Cryptography.MD5.Create();

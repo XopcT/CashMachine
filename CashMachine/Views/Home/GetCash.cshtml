@@ -1,0 +1,22 @@
+﻿@model CashMachine.Models.CashAmountRequest
+
+@{
+    ViewBag.Title = "Get Cash";
+}
+<script type="text/javascript">
+    function formatInput() {
+        var element = document.getElementById('Amount');
+        if (element.value == '0')
+            element.value = '';
+    }
+</script>
+
+<h2>Get Cash</h2>
+@using(@Html.BeginForm("GetCash", "Home", FormMethod.Post))
+{
+    @Html.TextBox("Amount", @Model.Amount, new { @readonly = "readonly" })
+    @Html.ValidationMessage("Amount")
+    @Html.Partial("~/Views/Controls/NumberInput.cshtml", "Amount")
+}
+@Html.ActionLink("Back", "Index")
+@Html.ActionLink("Exit", "Exit")

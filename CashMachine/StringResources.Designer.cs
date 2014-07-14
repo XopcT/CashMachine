@@ -61,6 +61,15 @@ namespace CashMachine {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount must be a positive Number..
+        /// </summary>
+        internal static string AmountError {
+            get {
+                return ResourceManager.GetString("AmountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, your Card is blocked. Call your Bank&apos;s Support or try to find another Card. Note, we&apos;ve already called Police, just in case. Please stay near the Cash Machine..
         /// </summary>
         internal static string CardIsBlocked {

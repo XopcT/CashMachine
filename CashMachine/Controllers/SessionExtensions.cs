@@ -56,6 +56,7 @@ namespace CashMachine.Controllers
         #region Fields
         private const string CardNumberKey = "number";
         private const string Pin = "pin";
+        
         #endregion
     }
 }
